@@ -1,0 +1,14 @@
+[package]
+name = "sill-mockhost"
+description = "A TLS 1.3 test host speaking Sill's host side, for tests without a Mac."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+sill-net.workspace = true
+tokio.workspace = true
+rustls.workspace = true
+tokio-rustls.workspace = true
+serde_json.workspace = true

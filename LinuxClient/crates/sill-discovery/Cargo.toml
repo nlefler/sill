@@ -1,0 +1,17 @@
+[package]
+name = "sill-discovery"
+description = "Sill client discovery (Bonjour browsing), row policy, connecting and the reconnect schedule."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+sill-net.workspace = true
+tokio.workspace = true
+mdns-sd = "0.13"
+ring.workspace = true
+
+[dev-dependencies]
+sill-mockhost = { path = "../sill-mockhost" }
+tokio = { workspace = true, features = ["test-util"] }

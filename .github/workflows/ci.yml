@@ -19,10 +19,10 @@ name: CI
 # design/DMGBackground.svg (the disk image's window).
 on:
   pull_request:
-    paths-ignore: ['**.md', 'docs/**', 'site/**', 'design/screenshots/**', 'LICENSE']
+    paths-ignore: ['**.md', 'docs/**', 'site/**', 'LinuxClient/**', 'design/screenshots/**', 'LICENSE']
   push:
     branches: [main]
-    paths-ignore: ['**.md', 'docs/**', 'site/**', 'design/screenshots/**', 'LICENSE']
+    paths-ignore: ['**.md', 'docs/**', 'site/**', 'LinuxClient/**', 'design/screenshots/**', 'LICENSE']
   workflow_dispatch:
     inputs:
       mutants:

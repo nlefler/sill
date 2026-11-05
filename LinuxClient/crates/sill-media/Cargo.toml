@@ -1,0 +1,14 @@
+[package]
+name = "sill-media"
+description = "Sill client media: wire-to-decoder conversion, HEVC decode (VAAPI or software), keyframe recovery, viewport and stats logic."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+ffmpeg-next = "8"
+ffmpeg-sys-next = "8"
+png = "0.17"
+
+[dev-dependencies]

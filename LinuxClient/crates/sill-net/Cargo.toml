@@ -1,0 +1,21 @@
+[package]
+name = "sill-net"
+description = "Sill client transport: device identity, pinned TLS 1.3, session, liveness. No UI."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+tokio.workspace = true
+rustls.workspace = true
+tokio-rustls.workspace = true
+rcgen.workspace = true
+x509-parser.workspace = true
+sha2 = { workspace = true }
+serde_json.workspace = true
+serde.workspace = true
+ring.workspace = true
+
+[dev-dependencies]
+sill-mockhost = { path = "../sill-mockhost" }

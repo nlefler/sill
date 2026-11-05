@@ -1,0 +1,69 @@
+# CI for the Linux client (LinuxClient/, a Rust workspace; docs/linux-client-plan.md): cargo test and
+# cargo clippy on an Ubuntu runner, only when LinuxClient/ or this file changes. The macOS CI
+# (ci.yml) ignores LinuxClient/. Nothing here signs anything or uses a secret.
+#
+# The build links FFmpeg (ffmpeg-next 8, so FFmpeg 8 development files) and libva. If the runner's
+# apt packages are older than that, this job fails at the ffmpeg-sys-next build step: not yet run on
+# GitHub (the client was developed on NixOS with ffmpeg-full 8.1).
+name: Linux client
+
+on:
+  pull_request:
+    paths: ['LinuxClient/**', '.github/workflows/linux-client.yml']
+  push:
+    branches: [main]
+    paths: ['LinuxClient/**', '.github/workflows/linux-client.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: linux-client-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: LinuxClient
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pkg-config clang libclang-dev libssl-dev \
+            libavcodec-dev libavformat-dev libavutil-dev libavfilter-dev libavdevice-dev libswscale-dev libswresample-dev \
+            libva-dev libwayland-dev libxkbcommon-dev libx11-dev libxcursor-dev libxi-dev libxrandr-dev \
+            libvulkan-dev mesa-vulkan-drivers
+
+      - name: Rust toolchain
+        run: |
+          rustup toolchain install stable --profile minimal --component clippy
+          rustup default stable
+          cargo --version
+
+      - name: Cache cargo
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            LinuxClient/target
+          key: linux-client-${{ runner.os }}-${{ hashFiles('LinuxClient/Cargo.lock') }}
+          restore-keys: linux-client-${{ runner.os }}-
+
+      - name: Test
+        run: cargo test --workspace --locked
+
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings

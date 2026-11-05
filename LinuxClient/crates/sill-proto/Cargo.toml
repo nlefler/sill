@@ -1,0 +1,10 @@
+[package]
+name = "sill-proto"
+description = "Sill wire format: the 14-byte header, message kinds and JSON payloads. No I/O."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

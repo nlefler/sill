@@ -1,0 +1,11 @@
+[package]
+name = "sill-ui-state"
+description = "The client's window-independent UI state: settings ledger, Desktop auto-ask, switcher model, controller."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+sill-net.workspace = true
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }

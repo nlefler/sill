@@ -1,0 +1,35 @@
+[package]
+name = "sill-app"
+description = "The Sill client for Linux: window, renderer and the session glue (M5: the Desktop, video only)."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[[bin]]
+name = "sill"
+path = "src/main.rs"
+
+[dependencies]
+sill-proto.workspace = true
+sill-net.workspace = true
+sill-discovery.workspace = true
+sill-media.workspace = true
+sill-input.workspace = true
+sill-mockhost = { path = "../sill-mockhost" }
+tokio.workspace = true
+winit = "0.30"
+wgpu = "25"
+ash = "0.38"
+pollster = "0.4"
+bytemuck = { version = "1", features = ["derive"] }
+png = "0.17"
+font8x8 = "0.3"
+sill-ui-state.workspace = true
+egui = "0.32"
+egui-winit = { version = "0.32", default-features = false, features = ["wayland", "x11"] }
+egui-wgpu = { version = "0.32", default-features = false }
+arboard = { version = "3", default-features = false, features = ["wayland-data-control"] }
+
+[dev-dependencies]
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+serde.workspace = true

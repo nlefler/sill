@@ -8089,6 +8089,11 @@ good.
   or beta; without one, CI warns and takes the newest Xcode there and a
   release (`fallback: false`) fails (CI only: it runs `sudo xcode-select`). The runner's `bash` is 3.2: try `run:`
   steps with `/bin/bash`. Actions are pinned by commit hash.
+- `LinuxClient/` — the Linux client (Rust workspace, not Swift; plan and per-milestone results in
+  `docs/linux-client-plan.md`): `sill-proto` (wire), `sill-net` (pinned TLS, pairing), `sill-discovery`,
+  `sill-media` (HEVC decode, VAAPI or software by stream size), `sill-input`, `sill-ui-state` (pure UI
+  state), `sill-app` (winit, wgpu, egui), `sill-mockhost`. Dev shell: `nix-shell` in the folder; CI is
+  `.github/workflows/linux-client.yml` (ci.yml ignores the folder). No audio, no multi-window.
 - `Tests/checks/` — the pure checks, a folder each: `main.swift`, `run.sh`
   (compiles the app's files it names with swiftc into `.build/checks/<name>/`
   and runs; `--mutants` runs `mutants.py`, passing only when every mutant is

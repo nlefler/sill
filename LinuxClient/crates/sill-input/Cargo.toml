@@ -1,0 +1,15 @@
+[package]
+name = "sill-input"
+description = "The Sill client for Linux: keys, pointer and scroll as the host's kind 8 input (pure state machines)."
+edition.workspace = true
+license.workspace = true
+version.workspace = true
+
+[dependencies]
+sill-proto.workspace = true
+winit = "0.30"
+
+[dev-dependencies]
+sill-mockhost = { path = "../sill-mockhost" }
+sill-net.workspace = true
+tokio.workspace = true
