@@ -1,0 +1,4 @@
+# The Vulkan loader (1.4.x) crashes in SetDebugUtilsObjectNameEXT when several devices are created and
+# used from parallel test threads (seen in tests that use no zero-copy at all). Tests run one at a time.
+[env]
+RUST_TEST_THREADS = "1"
