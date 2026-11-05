@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sill
+Comment=Stream your Mac's desktop or windows
+Exec=sill
+Icon=sill
+Terminal=false
+Categories=Network;RemoteAccess;
